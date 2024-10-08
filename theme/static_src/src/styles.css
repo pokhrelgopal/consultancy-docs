@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-size: 1.13rem;
+}
+
+.input__text {
+  @apply p-3 w-full border border-gray-300;
+}
+
+.input__number {
+  @apply p-3 w-full border border-gray-300;
+}
+
+.input__textarea {
+  @apply p-3 w-full border border-gray-300 h-36;
+}
+
+.input__file {
+  @apply w-full p-3 border border-gray-300;
+}
+
+.input__number::-webkit-outer-spin-button,
+.input__number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn_primary {
+  @apply bg-lightGreen text-white font-semibold py-2.5 px-8 rounded;
+}
+
+.btn__secondary {
+  @apply bg-lightBlue text-white font-semibold py-2.5 px-8 rounded;
+}
+.btn__danger {
+  @apply bg-red-600 text-white font-semibold py-2.5 px-8 rounded;
+}
+.btn {
+  @apply flex items-center gap-2 px-4 py-2 group-active:text-opacity-75 transition duration-300;
+}
+.btn__lg {
+  @apply flex items-center gap-2 px-8 py-3 group-active:text-opacity-75 transition duration-300;
+}

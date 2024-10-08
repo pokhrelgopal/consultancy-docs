@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main class="container mx-auto my-12">
+    {% if not request.user.is_authenticated %}
+    <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
+        <strong class="block font-medium text-red-800"> Login required </strong>
+        <p class="mt-2 text-sm text-red-700"> You need to login to add a blog post. </p>
+    </div>
+    {% else %}
+    <form action="" method="post" enctype="multipart/form-data" class="space-y-5">
+        {% csrf_token %}
+
+        <!-- Render form dynamically -->
+        {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}" class="block text-lg text-gray-700">
+                {{ field.label_tag }}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ field.errors }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <!-- Success/Error Messages -->
+        {% include 'common/messages.html' %}
+
+        <!-- Submit Button -->
+        <div>
+            <button class="btn__styled__secondary__lg"
+                type="submit">
+                Submit
+            </button>
+        </div>
+    </form>
+    {% endif %}
+</main>
+{% endblock %}

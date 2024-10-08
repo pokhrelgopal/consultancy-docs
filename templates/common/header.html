@@ -1,0 +1,18 @@
+{% load static %}
+<header class="bg-transparent">
+  <nav class="container mx-auto flex items-center justify-between py-2">
+    <div>
+      {%include 'common/logo.html'%}
+    </div>
+    <div class="flex items-center space-x-14">
+      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Home</span>
+      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Why ConsultancyDocs</span>
+      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">FAQs</span>
+      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Pricing</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
+      <a href="{% url 'register' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">Become a Partner</a>
+    </div>
+  </nav>
+</header>
