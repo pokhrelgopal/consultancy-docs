@@ -50,6 +50,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "users.context.consultancy",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -76,10 +77,6 @@ DATABASES = {
         "PORT": "3306",
     }
 }
-
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
 
 
 STATICFILES_DIRS = []
@@ -109,8 +106,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
-STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Use "staticfiles" to avoid conflict
+
+# These are the directories where your static files live during development
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Ensure this is not the same as STATIC_ROOT
+]
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

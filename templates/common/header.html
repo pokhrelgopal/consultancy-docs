@@ -11,8 +11,19 @@
       <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Pricing</span>
     </div>
     <div class="flex items-center gap-6">
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="cursor-pointer font-medium text-darkGray">Logout</a>
+      {% else %}
       <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
-      <a href="{% url 'register' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">Become a Partner</a>
+      {% endif %}
+      {% if consultancy %}
+      <a href="#" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
+        Dashboard
+      </a>
+        {% else %}
+      <a href="{% url 'register' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">Become a
+        Partner</a>
+        {% endif %}
     </div>
   </nav>
 </header>

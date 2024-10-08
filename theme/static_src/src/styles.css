@@ -28,8 +28,8 @@ body{
   margin: 0;
 }
 
-.btn_primary {
-  @apply bg-lightGreen text-white font-semibold py-2.5 px-8 rounded;
+.btn__primary {
+  @apply bg-navyBlue text-white font-semibold py-2.5 px-8 rounded;
 }
 
 .btn__secondary {

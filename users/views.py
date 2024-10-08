@@ -1,13 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .validation import Validation as v
-from .models import User
-
-
-def index(request):
-    return render(request, "consultancy/index.html")
+from .models import User, Consultancy
+from .forms import ConsultancyForm
 
 
 def login(request):
@@ -76,8 +73,18 @@ def register(request):
     return render(request, "auth/register.html")
 
 
+@login_required
 def onboarding(request, pk):
-    user = User.objects.get(id=pk)
+    user = get_object_or_404(User, id=pk)
     if user != request.user:
         return redirect("login")
-    return render(request, "consultancy/onboarding.html")
+    if Consultancy.objects.select_related("user").filter(user=user).exists():
+        return redirect("index")
+    form = ConsultancyForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        consultancy = form.save(commit=False)
+        consultancy.user = user
+        consultancy.save()
+        return redirect("index")
+
+    return render(request, "consultancy/onboarding.html", {"form": form})

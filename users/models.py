@@ -55,6 +55,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Consultancy(models.Model):
+    STATUS_CHOICES = (
+        ("pending", "Pending"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
+    )
 
     STATE_CHOICES = (
         ("Province 1", "Province 1"),
@@ -67,19 +72,19 @@ class Consultancy(models.Model):
     )
 
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    company_email = models.EmailField(max_length=255, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     logo = models.ImageField(upload_to="consultancy", null=True, blank=True)
     website = models.URLField(max_length=255, null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
-    zip_code = models.CharField(max_length=10, null=True, blank=True)
-    state = models.CharField(
-        max_length=100, choices=STATE_CHOICES, null=True, blank=True
-    )
-    country = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=10)
+    state = models.CharField(max_length=100, choices=STATE_CHOICES)
+    country = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
     whatsapp = models.CharField(max_length=15, null=True, blank=True)
-    is_approved = models.BooleanField(default=False)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="pending")
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
