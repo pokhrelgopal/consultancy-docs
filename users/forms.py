@@ -19,16 +19,16 @@ class ConsultancyForm(forms.ModelForm):
             "whatsapp",
         ]
         labels = {
-            "name": _("Name"),
+            "name": _("Company Name"),
             "company_email": _("Company Email"),
-            "website": _("Website"),
+            "website": _("Company Website"),
             "address": _("Address"),
             "city": _("City"),
             "state": _("State"),
             "zip_code": _("Zip Code"),
             "country": _("Country"),
-            "phone": _("Phone"),
-            "whatsapp": _("WhatsApp"),
+            "phone": _("Phone Number"),
+            "whatsapp": _("WhatsApp Number"),
         }
         widgets = {
             "name": forms.TextInput(attrs={"class": "input__text"}),

@@ -73,7 +73,7 @@ class Consultancy(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
     company_email = models.EmailField(max_length=255, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     logo = models.ImageField(upload_to="consultancy", null=True, blank=True)
     website = models.URLField(max_length=255, null=True, blank=True)

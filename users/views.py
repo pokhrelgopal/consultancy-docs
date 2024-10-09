@@ -85,6 +85,17 @@ def register(request):
     return render(request, "auth/register.html")
 
 
+def student_register(request, slug):
+ 
+    if request.user.is_authenticated:
+        return redirect("index")
+    try:
+        consultancy = Consultancy.objects.values("id", "name", "slug").get(slug=slug)
+    except Consultancy.DoesNotExist:
+        return redirect("index")
+    return render(request, "auth/student_register.html", {"consultancy": consultancy})
+
+
 @login_required
 def onboarding(request, pk):
     user = get_object_or_404(User, id=pk)

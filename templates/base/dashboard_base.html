@@ -1,0 +1,37 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=jost:200,300,400,500,600,700,800,900" rel="stylesheet" />
+    <title>Document</title>
+    {% tailwind_css %}
+</head>
+
+<body style="font-family: 'Jost', sans-serif" class="min-h-screen w-full flex">
+    <!-- Sidebar -->
+    <aside class="w-72 h-screen bg-gray-800 text-white fixed">
+        {% include 'common/dashboard_sidebar.html' %}
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 ml-72 flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b w-full h-16 flex items-center px-6 fixed top-0 left-0 right-0 z-10 ml-72">
+            {% include 'common/dashboard_navbar.html' %}
+        </header>
+
+        <!-- Content Area -->
+        <main class="flex-1 p-6 mt-16 bg-gray-50">
+            <article>
+                {% block content %} {% endblock %}
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

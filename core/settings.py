@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "consultancydocs",
     "tailwind",
     "theme",
+    "qr_code",
     "django_browser_reload",
     "django_cleanup.apps.CleanupConfig",
     "django.contrib.admin",

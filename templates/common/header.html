@@ -16,9 +16,9 @@
       {% else %}
       <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
       {% endif %}
-      {% if consultancy %}
+      {% if user.is_authenticated and consultancy %}
       {% if is_profile_complete %}
-      <a href="#" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
+      <a href="{% url 'dashboard' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
         Dashboard
       </a>
       {% else %}
