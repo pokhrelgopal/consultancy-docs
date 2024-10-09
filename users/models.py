@@ -36,14 +36,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name="email address", max_length=255, unique=True)
     full_name = models.CharField(max_length=255, blank=True)
     role = models.CharField(max_length=255, choices=ROLE_CHOICES, default="student")
-    associated_with = models.OneToOneField(
+    associated_with = models.ForeignKey(
         "Consultancy",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         related_name="students",
     )
-
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -80,7 +79,10 @@ class Consultancy(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
     company_email = models.EmailField(max_length=255, unique=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     logo = models.ImageField(upload_to="consultancy", null=True, blank=True)
     website = models.URLField(max_length=255, null=True, blank=True)

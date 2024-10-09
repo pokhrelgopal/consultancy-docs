@@ -1,5 +1,391 @@
 {% extends 'base/profile_base.html' %}
 {% block content %}
 
-<div class="container mx-auto my-4">Student Profile</div>
+<div class="container mx-auto my-4">
+    <div class="my-10">
+        <div class="mt-8">
+            <div class="border-b border-gray-200 w-fit">
+                <nav class="flex gap-6" aria-label="Tabs">
+                    <a href="#"
+                        class="shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600 hover:border-gray-300 hover:text-gray-700">
+                        Personal
+                    </a>
+
+                    <a href="#"
+                        class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                        Educational
+                    </a>
+
+                    <a href="#"
+                        class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                        Test Scores
+                    </a>
+
+                    <a href="#"
+                        class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500"
+                        aria-current="page">
+                        Notifications
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white w-full shadow py-5 px-8 my-10">
+
+
+        {% include 'components/message.html' %}
+
+        <form id="register__form" method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <!-- Personal Details Group -->
+            <div class="personal__details">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Personal Details</h1>
+                    <p class="text-gray-600">
+                        Your personal details are important for your profile. Here you can update your personal details.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.phone_number.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.phone_number.label }}
+                        </label>
+                        {{ form.phone_number }}
+                        {% if form.phone_number.errors %}
+                        <div class="text-red-500 text-sm">{{ form.phone_number.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.date_of_birth.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.date_of_birth.label }}
+                        </label>
+                        {{ form.date_of_birth }}
+                        {% if form.date_of_birth.errors %}
+                        <div class="text-red-500 text-sm">{{ form.date_of_birth.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.gender.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                            {{ form.gender.label }}
+                        </label>
+                        {{ form.gender }}
+                        {% if form.gender.errors %}
+                        <div class="text-red-500 text-sm">{{ form.gender.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.marital_status.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.marital_status.label }}
+                        </label>
+                        {{ form.marital_status }}
+                        {% if form.marital_status.errors %}
+                        <div class="text-red-500 text-sm">{{ form.marital_status.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temporary Address Group -->
+            <div class="temorary__address">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Temorary Address</h1>
+                    <p class="text-gray-600">
+                        Make sure to use the correct address for your profile.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.temporary_address.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.temporary_address.label }}
+                        </label>
+                        {{ form.temporary_address }}
+                        {% if form.temporary_address.errors %}
+                        <div class="text-red-500 text-sm">{{ form.temporary_address.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.temporary_city.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.temporary_city.label }}
+                        </label>
+                        {{ form.temporary_city }}
+                        {% if form.temporary_city.errors %}
+                        <div class="text-red-500 text-sm">{{ form.temporary_city.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.temporary_state.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.temporary_state.label }}
+                        </label>
+                        {{ form.temporary_state }}
+                        {% if form.temporary_state.errors %}
+                        <div class="text-red-500 text-sm">{{ form.temporary_state.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.temporary_country.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.temporary_country.label }}
+                        </label>
+                        {{ form.temporary_country }}
+                        {% if form.temporary_country.errors %}
+                        <div class="text-red-500 text-sm">{{ form.temporary_country.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.temporary_zip_code.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.temporary_zip_code.label }}
+                        </label>
+                        {{ form.temporary_zip_code }}
+                        {% if form.temporary_zip_code.errors %}
+                        <div class="text-red-500 text-sm">{{ form.temporary_zip_code.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permanent Address Group -->
+            <div class="permanant__address">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Permanant Address</h1>
+                    <p class="text-gray-600">
+                        Make sure to use the correct address for your profile.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.permanent_address.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.permanent_address.label }}
+                        </label>
+                        {{ form.permanent_address }}
+                        {% if form.permanent_address.errors %}
+                        <div class="text-red-500 text-sm">{{ form.permanent_address.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.permanent_city.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.permanent_city.label }}
+                        </label>
+                        {{ form.permanent_city }}
+                        {% if form.permanent_city.errors %}
+                        <div class="text-red-500 text-sm">{{ form.permanent_city.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.permanent_state.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.permanent_state.label }}
+                        </label>
+                        {{ form.permanent_state }}
+                        {% if form.permanent_state.errors %}
+                        <div class="text-red-500 text-sm">{{ form.permanent_state.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.permanent_country.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.permanent_country.label }}
+                        </label>
+                        {{ form.permanent_country }}
+                        {% if form.permanent_country.errors %}
+                        <div class="text-red-500 text-sm">{{ form.permanent_country.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="{{ form.permanent_zip_code.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.permanent_zip_code.label }}
+                        </label>
+                        {{ form.permanent_zip_code }}
+                        {% if form.permanent_zip_code.errors %}
+                        <div class="text-red-500 text-sm">{{ form.permanent_zip_code.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passport Details Group -->
+            <div class="passport__details">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Passport Details</h1>
+                    <p class="text-gray-600">
+                        Make sure to use the correct details about your passport.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.passport_number.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.passport_number.label }}
+                        </label>
+                        {{ form.passport_number }}
+                        {% if form.passport_number.errors %}
+                        <div class="text-red-500 text-sm">{{ form.passport_number.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.issue_date.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                            {{ form.issue_date.label }}
+                        </label>
+                        {{ form.issue_date }}
+                        {% if form.issue_date.errors %}
+                        <div class="text-red-500 text-sm">{{ form.issue_date.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.expiry_date.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                            {{ form.expiry_date.label }}
+                        </label>
+                        {{ form.expiry_date }}
+                        {% if form.expiry_date.errors %}
+                        <div class="text-red-500 text-sm">{{ form.expiry_date.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.issue_country.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.issue_country.label }}
+                        </label>
+                        {{ form.issue_country }}
+                        {% if form.issue_country.errors %}
+                        <div class="text-red-500 text-sm">{{ form.issue_country.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="birth__details">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Birth Details</h1>
+                    <p class="text-gray-600">
+                        Make sure to use the correct details about your birth.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.city_of_birth.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.city_of_birth.label }}
+                        </label>
+                        {{ form.city_of_birth }}
+                        {% if form.city_of_birth.errors %}
+                        <div class="text-red-500 text-sm">{{ form.city_of_birth.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.country_of_birth.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.country_of_birth.label }}
+                        </label>
+                        {{ form.country_of_birth }}
+                        {% if form.country_of_birth.errors %}
+                        <div class="text-red-500 text-sm">{{ form.country_of_birth.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.nationality.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                            {{ form.nationality.label }}
+                        </label>
+                        {{ form.nationality }}
+                        {% if form.nationality.errors %}
+                        <div class="text-red-500 text-sm">{{ form.nationality.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.citizenship.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                            {{ form.citizenship.label }}
+                        </label>
+                        {{ form.citizenship }}
+                        {% if form.citizenship.errors %}
+                        <div class="text-red-500 text-sm">{{ form.citizenship.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="emergency__contact">
+                <div class="my-5">
+                    <h1 class="text-2xl font-bold">Emergency Contact</h1>
+                    <p class="text-gray-600">
+                        Make sure to use the correct details about your emergency contact.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="{{ form.emergency_contact_name.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.emergency_contact_name.label }}
+                        </label>
+                        {{ form.emergency_contact_name }}
+                        {% if form.emergency_contact_name.errors %}
+                        <div class="text-red-500 text-sm">{{ form.emergency_contact_name.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.emergency_contact_relationship.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.emergency_contact_relationship.label }}
+                        </label>
+                        {{ form.emergency_contact_relationship }}
+                        {% if form.emergency_contact_relationship.errors %}
+                        <div class="text-red-500 text-sm">{{ form.emergency_contact_relationship.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.emergency_contact_phone.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.emergency_contact_phone.label }}
+                        </label>
+                        {{ form.emergency_contact_phone }}
+                        {% if form.emergency_contact_phone.errors %}
+                        <div class="text-red-500 text-sm">{{ form.emergency_contact_phone.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.emergency_contact_email.id_for_label }}"
+                            class="block text-gray-700 font-semibold mb-2">
+                            {{ form.emergency_contact_email.label }}
+                        </label>
+                        {{ form.emergency_contact_email }}
+                        {% if form.emergency_contact_email.errors %}
+                        <div class="text-red-500 text-sm">{{ form.emergency_contact_email.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <button id="register__button" type="submit"
+                class="w-40 bg-blue-700 hover:opacity-90 text-white rounded-sm py-3 font-medium focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-red-900">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const registerForm = document.getElementById('register__form');
+    const registerButton = document.getElementById('register__button');
+
+    registerForm.addEventListener('submit', () => {
+        registerButton.disabled = true;
+        registerButton.innerHTML = 'Submitting...';
+    });
+</script>
+
 {% endblock %}

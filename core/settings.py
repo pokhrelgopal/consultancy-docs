@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "users",
     "consultancydocs",
     "tailwind",
+    "student",
     "theme",
     "qr_code",
     "django_browser_reload",
