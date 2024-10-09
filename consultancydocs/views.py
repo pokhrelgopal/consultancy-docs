@@ -3,10 +3,11 @@ from users.models import User, Consultancy
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url="login")
 def index(request):
     return render(request, "consultancy/index.html")
 
+def error(request):
+    return render(request, "error.html")
 
 @login_required(login_url="login")
 def dashboard(request):

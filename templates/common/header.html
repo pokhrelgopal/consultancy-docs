@@ -1,14 +1,16 @@
 {% load static %}
 <header class="bg-transparent">
-  <nav class="container mx-auto flex items-center justify-between py-2">
-    <div>
-      {%include 'common/logo.html'%}
-    </div>
-    <div class="flex items-center space-x-14">
-      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Home</span>
-      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Why ConsultancyDocs</span>
-      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">FAQs</span>
-      <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Pricing</span>
+  <nav class="container mx-auto flex items-center justify-between py-3">
+    <div class="flex items-center gap-10">
+      <div>
+        {%include 'common/logo.html'%}
+      </div>
+      <div class="flex items-center space-x-14">
+        <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Home</span>
+        <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Why ConsultancyDocs</span>
+        <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">FAQs</span>
+        <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Pricing</span>
+      </div>
     </div>
     <div class="flex items-center gap-6">
       {% if user.is_authenticated %}

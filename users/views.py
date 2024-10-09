@@ -86,13 +86,13 @@ def register(request):
 
 
 def student_register(request, slug):
- 
     if request.user.is_authenticated:
         return redirect("index")
     try:
         consultancy = Consultancy.objects.values("id", "name", "slug").get(slug=slug)
     except Consultancy.DoesNotExist:
-        return redirect("index")
+        messages.error(request, "Consultancy not found.")
+        return redirect("error")
     return render(request, "auth/student_register.html", {"consultancy": consultancy})
 
 
