@@ -1,0 +1,21 @@
+<div class="border-b border-gray-200 w-fit">
+    <nav class="flex gap-6" aria-label="Tabs">
+        <a href="{% url 'student_profile' %}"
+            class="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700 
+            {% if request.resolver_match.url_name == 'student_profile' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+            Profile
+        </a>
+
+        <a href="{% url 'student_profile_educational' %}"
+            class="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700 
+            {% if request.resolver_match.url_name == 'student_profile_educational' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+            Educational
+        </a>
+
+        <a href="{% url 'student_profile_test_scores' %}"
+            class="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium hover:border-gray-300 hover:text-gray-700 
+            {% if request.resolver_match.url_name == 'student_profile_test_scores' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+            Test Scores
+        </a>
+    </nav>
+</div>
