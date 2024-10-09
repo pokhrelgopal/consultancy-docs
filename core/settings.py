@@ -118,12 +118,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Use "staticfiles" to avoid conflict
-
-# These are the directories where your static files live during development
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Ensure this is not the same as STATIC_ROOT
+    BASE_DIR / "static",
 ]
 
 
@@ -135,3 +132,8 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 TAILWIND_APP_NAME = "theme"
 
 AUTH_USER_MODEL = "users.User"
+
+BUNNY_STORAGE_ZONE_NAME = "agentdocx"
+BUNNY_PULL_ZONE_URL = "AgentDocxPullZone.b-cdn.net"
+BUNNY_API_KEY = "01c261fd-a0e0-41bd-878c95b96c17-0079-45a2"
+BUNNY_STORAGE_ZONE_REGION = "SG"
