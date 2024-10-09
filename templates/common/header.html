@@ -17,13 +17,19 @@
       <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
       {% endif %}
       {% if consultancy %}
+      {% if is_profile_complete %}
       <a href="#" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
         Dashboard
       </a>
-        {% else %}
+      {% else %}
+      <a href="{% url 'onboarding' user.id %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
+        Complete Profile
+      </a>
+      {% endif %}
+      {% else %}
       <a href="{% url 'register' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">Become a
         Partner</a>
-        {% endif %}
+      {% endif %}
     </div>
   </nav>
 </header>

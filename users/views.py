@@ -22,6 +22,13 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
+            if user.role == "consultancy":
+                if (
+                    not Consultancy.objects.select_related("user")
+                    .filter(user=user)
+                    .exists()
+                ):
+                    return redirect("onboarding", pk=user.id)
             return redirect("index")
         else:
             messages.error(request, "Invalid email or password.")
@@ -43,6 +50,7 @@ def register(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirm_password")
+        role = request.POST.get("role")
 
         if v.is_any_empty(full_name, email, password, confirm_password):
             messages.error(request, "All fields are required.")
@@ -61,12 +69,16 @@ def register(request):
                 messages.error(request, "Email is already taken.")
                 return render(request, "auth/register.html")
             user = User.objects.create_user(
-                email=email, password=password, full_name=full_name
+                email=email.strip(),
+                password=password,
+                full_name=full_name.strip(),
+                role=role,
             )
             user.save()
-            auth_login(request, user)
-            return redirect("onboarding", pk=user.id)
+            messages.success(request, "Account created successfully.")
+            return redirect("login")
         except Exception as e:
+            print(e)
             messages.error(request, "Something went wrong.")
             return render(request, "auth/register.html")
 
