@@ -90,6 +90,56 @@ def student_register(request, slug):
         return redirect("index")
     try:
         consultancy = Consultancy.objects.values("id", "name", "slug").get(slug=slug)
+
+        if request.method == "POST":
+            full_name = request.POST.get("full_name")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            confirm_password = request.POST.get("confirm_password")
+
+            if v.is_any_empty(full_name, email, password, confirm_password):
+                messages.error(request, "All fields are required.")
+                return render(
+                    request, "auth/student_register.html", {"consultancy": consultancy}
+                )
+
+            if not v.match(password, confirm_password):
+                messages.error(request, "Password does not match.")
+                return render(
+                    request, "auth/student_register.html", {"consultancy": consultancy}
+                )
+
+            if not v.is_valid_email(email):
+                messages.error(request, "Invalid email.")
+                return render(
+                    request, "auth/student_register.html", {"consultancy": consultancy}
+                )
+
+            try:
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, "Email is already taken.")
+                    return render(
+                        request,
+                        "auth/student_register.html",
+                        {"consultancy": consultancy},
+                    )
+                user = User.objects.create_user(
+                    email=email.strip(),
+                    password=password,
+                    full_name=full_name.strip(),
+                    role="student",
+                    associated_with=Consultancy.objects.get(slug=slug),
+                )
+                user.save()
+                messages.success(request, "Account created successfully.")
+                return redirect("login")
+            except Exception as e:
+                print(e)
+                messages.error(request, "Something went wrong.")
+                return render(
+                    request, "auth/student_register.html", {"consultancy": consultancy}
+                )
+
     except Consultancy.DoesNotExist:
         messages.error(request, "Consultancy not found.")
         return redirect("error")
