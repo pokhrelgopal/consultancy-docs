@@ -7,10 +7,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.getenv("SECRET")
+SECRET_KEY = "os9n89@w-cb&v%h1843f(a(b1fu^si!hqn@)0k1ulxh$*l))t5"
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["dreambamboohouse.com.np", "www.dreambamboohouse.com.np"]
 
 
 INSTALLED_APPS = [
@@ -72,14 +74,13 @@ WSGI_APPLICATION = "core.wsgi.application"
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "consultancy_docs",
-#         "USER": "root",
-#         "PASSWORD": "root",
+#         "NAME": "dreambam_consultancy_docs",
+#         "USER": "dreambam_pokhrelgopal",
+#         "PASSWORD": "pokhrelgopal",
 #         "HOST": "localhost",
-#         "PORT": "3306",
+#         "PORT": "",
 #     }
 # }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
