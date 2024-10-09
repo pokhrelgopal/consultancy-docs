@@ -29,7 +29,10 @@ def login(request):
                     .exists()
                 ):
                     return redirect("onboarding", pk=user.id)
-            return redirect("index")
+                else:
+                    return redirect("dashboard")
+            elif user.role == "student":
+                return redirect("student_home")
         else:
             messages.error(request, "Invalid email or password.")
 

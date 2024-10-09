@@ -10,5 +10,5 @@ urlpatterns = [
         name="student_register",
     ),
     path("auth/logout/", views.logout, name="logout"),
-    path("profile/onboarding/<int:pk>/", views.onboarding, name="onboarding"),
+    path("consultancy/onboarding/<int:pk>/", views.onboarding, name="onboarding"),
 ]

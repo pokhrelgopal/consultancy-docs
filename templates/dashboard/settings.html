@@ -1,4 +1,75 @@
 {%extends 'base/dashboard_base.html'%}
 {%block content%}
-Settings
+
+<div class="mb-3">
+    <h4 class="text-3xl font-bold">Settings</h4>
+    <p class="max-w-3xl">
+        Here you can manage your settings. You can view, edit, delete and add settings.
+    </p>
+</div>
+<div>
+    <div class="sm:hidden">
+        <label for="Tab" class="sr-only">Tab</label>
+        <select id="Tab" class="w-full rounded-md border-gray-200">
+            <option>Settings</option>
+            <option>Messages</option>
+            <option>Archive</option>
+            <option select>Notifications</option>
+        </select>
+    </div>
+    <div class="hidden sm:block mt-8">
+        <div class="border-b border-gray-200 w-fit">
+            <nav class="-mb-px flex gap-6" aria-label="Tabs">
+                <a href="#"
+                    class="shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600 hover:border-gray-300 hover:text-gray-700">
+                    Settings
+                </a>
+
+                <a href="#"
+                    class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                    Messages
+                </a>
+
+                <a href="#"
+                    class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                    Archive
+                </a>
+
+                <a href="#" class="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500"
+                    aria-current="page">
+                    Notifications
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="bg-white w-full  shadow py-5 px-8 my-3">
+    <div class="my-5">
+        <h1 class="text-2xl font-semibold mb-2">Update Organization Details</h1>
+        <p class="text-gray-600">
+            Your organization details are important for your profile. Here you can update your organization details.
+        </p>
+    </div>
+
+    {% include 'components/message.html' %}
+
+    <form method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for field in form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block text-gray-700 font-semibold mb-2">
+                    {{ field.label }}
+                </label>
+                {{ field }} <!-- Render the field -->
+                {% if field.errors %}
+                <div class="text-red-500 text-sm">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn__primary hover:opacity-90">Update</button>
+    </form>
+
+</div>
 {%endblock%}

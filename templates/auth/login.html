@@ -9,7 +9,7 @@
                 Enter your email and password to login to your account.
             </p>
         </div>
-        <form class="space-y-4" method="post" action="{% url 'login' %}">
+        <form class="space-y-4" method="post" action="{% url 'login' %}" id="login-form">
             {% include 'components/message.html' %}
             {% csrf_token %}
             <div>
@@ -39,7 +39,7 @@
                     </button>
                 </div>
             </div>
-            <button type="submit"
+            <button type="submit" id="login-button"
                 class="w-full bg-blue-700 hover:opacity-90 text-white rounded-sm py-3 font-medium focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-bluer">
                 Sign In
             </button>
@@ -57,12 +57,16 @@
 <script>
     const showPassword = document.getElementById('show-password');
     const password = document.getElementById('password');
+    const loginForm = document.getElementById('login-form');
+    const loginButton = document.getElementById('login-button');
+
     showPassword.addEventListener('click', () => {
-        if (password.type === 'password') {
-            password.type = 'text';
-        } else {
-            password.type = 'password';
-        }
+        password.type = password.type === 'password' ? 'text' : 'password';
+    });
+
+    loginForm.addEventListener('submit', () => {
+        loginButton.disabled = true;
+        loginButton.innerText = 'Signing In...';
     });
 </script>
 {% endblock %}

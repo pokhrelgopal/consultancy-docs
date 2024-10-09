@@ -14,7 +14,7 @@
 
         {% include 'components/message.html' %}
 
-        <form class="space-y-4" method="post">
+        <form id="register__form" class="space-y-4" method="post">
             {% csrf_token %}
             <div>
                 <label for="name" class="block font-medium text-gray-900 mb-1">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit"
+            <button type="submit" id="register__button"
                 class="w-full bg-blue-700 hover:opacity-90 text-white rounded-sm py-3 font-medium focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-red-900">
                 Continue
             </button>
@@ -95,6 +95,9 @@
 <script>
     const showPassword = document.getElementById('show-password');
     const password = document.getElementById('password');
+    const registerButton = document.getElementById('register__button');
+    const registerForm = document.getElementById('register__form');
+
     showPassword.addEventListener('click', () => {
         if (password.type === 'password') {
             password.type = 'text';
@@ -111,6 +114,10 @@
         } else {
             confirmPassword.type = 'password';
         }
+    });
+    registerForm.addEventListener('submit', () => {
+        registerButton.disabled = true;
+        registerButton.innerText = 'Registering...';
     });
 </script>
 

@@ -29,14 +29,14 @@ body{
 }
 
 .btn__primary {
-  @apply bg-navyBlue text-white font-semibold py-2.5 px-8 rounded;
+  @apply bg-navyBlue text-white py-2.5 px-8 rounded;
 }
 
 .btn__secondary {
-  @apply bg-lightBlue text-white font-semibold py-2.5 px-8 rounded;
+  @apply bg-lightBlue text-white py-2.5 px-8 rounded;
 }
 .btn__danger {
-  @apply bg-red-600 text-white font-semibold py-2.5 px-8 rounded;
+  @apply bg-red-600 text-white py-2.5 px-8 rounded;
 }
 .btn {
   @apply flex items-center gap-2 px-4 py-2 group-active:text-opacity-75 transition duration-300;

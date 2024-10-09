@@ -5,23 +5,23 @@
       <div>
         {%include 'common/logo.html'%}
       </div>
-      <div class="flex items-center space-x-14">
+      <div class="hidden md:flex items-center space-x-14">
         <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Home</span>
         <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Why ConsultancyDocs</span>
         <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">FAQs</span>
         <span class="hover:text-blue-600 cursor-pointer font-medium text-darkGray">Pricing</span>
       </div>
     </div>
-    <div class="flex items-center gap-6">
+    <div class="hidden md:flex items-center gap-6">
       {% if user.is_authenticated %}
       <a href="{% url 'logout' %}" class="cursor-pointer font-medium text-darkGray">Logout</a>
-      {% else %}
-      <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
-      {% endif %}
-      {% if user.is_authenticated and consultancy %}
+      {% if consultancy %}
       {% if is_profile_complete %}
-      <a href="{% url 'dashboard' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
-        Dashboard
+      <a href="{% url 'dashboard'%}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
+        <span>Dashboard</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+        </svg>
       </a>
       {% else %}
       <a href="{% url 'onboarding' user.id %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
@@ -29,9 +29,26 @@
       </a>
       {% endif %}
       {% else %}
+      <a href="{% url 'student_home' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">
+        <span>Profile</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+        </svg>
+
+      </a>
+      {% endif %}
+      {% else %}
+      <a href="{% url 'login' %}" class="cursor-pointer font-medium text-darkGray">Login</a>
       <a href="{% url 'register' %}" class="btn__lg bg-blue-600 hover:bg-blue-700 rounded-full text-white">Become a
         Partner</a>
       {% endif %}
     </div>
+    <p class="md:hidden cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+
+    </p>
   </nav>
 </header>

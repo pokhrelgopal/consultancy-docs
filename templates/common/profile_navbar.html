@@ -1,0 +1,33 @@
+<header class="bg-white shadow-xl border-b">
+    <nav class="container mx-auto flex items-center justify-between">
+        <div><span class="text-lg font-bold text-blue-700">{{student_consultancy.name}}</span></div>
+        <div class="hidden md:flex justify-center gap-10">
+            <a href="{% url 'student_home' %}"
+                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_home' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
+                Home</a>
+            <a href="{% url 'student_profile' %}"
+                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_profile' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
+                Student Profile</a>
+            <a href="{% url 'student_documents' %}"
+                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_documents' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
+                Documents</a>
+            <a href="{% url 'student_applications' %}"
+                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_applications' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
+                Applications</a>
+        </div>
+        <div>
+            <div>
+                <a href="{% url 'logout' %}" class="flex items-center gap-3 p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                    </svg>
+
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+    </nav>
+</header>
