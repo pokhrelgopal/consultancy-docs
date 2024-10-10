@@ -1,0 +1,16 @@
+<div class="border-b border-gray-200 w-fit">
+    <nav class="flex gap-6" aria-label="Tabs">
+        <a href="{% url 'student_documents' %}"
+            class="shrink-0 border-b-2 px-1 pb-4 text-sm md:text-lg font-medium hover:border-gray-300 hover:text-gray-700 
+            {% if request.resolver_match.url_name == 'student_documents' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+            My Documents
+        </a>
+
+        <a href="{% url 'student_profile_counsellor_documents' %}"
+            class="shrink-0 border-b-2 px-1 pb-4 text-sm md:text-lg font-medium hover:border-gray-300 hover:text-gray-700 
+            {% if request.resolver_match.url_name == 'student_profile_counsellor_documents' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+            Documents From Counsellor
+        </a>
+
+    </nav>
+</div>

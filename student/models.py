@@ -85,6 +85,7 @@ class Education(models.Model):
     class Meta:
         db_table = "education"
         verbose_name_plural = "Education"
+        unique_together = ("user", "level")
 
 
 class LanguageTest(models.Model):
@@ -112,3 +113,56 @@ class LanguageTest(models.Model):
         db_table = "language_test"
         verbose_name_plural = "Language Tests"
         unique_together = ("user", "test")
+
+
+class Document(models.Model):
+    DOCUMENT_CHOICES = (
+        ("application_form", "Application Form"),
+        ("university_documents", "University Documents"),
+        ("business_registration", "Business Registration"),
+        ("passport_copy", "Passport Copy"),
+        ("visa_request_letter", "Visa Request Letter"),
+        ("statement_of_purpose", "Statement of Purpose"),
+        ("moe", "MOE"),
+        ("character_certificate", "Character Certificate"),
+        ("ielts", "IELTS"),
+        ("noc_swift", "NOC/Swift"),
+        ("medical_report", "Medical Report"),
+        ("sponsorship_letter", "Sponsorship Letter"),
+        ("ca_report", "CA Report"),
+        ("ward_document_relationship", "Ward Document Relationship"),
+        ("ward_documents_annual_income", "Ward Documents Annual Income"),
+        ("ward_documents_tax_clearance", "Ward Documents Tax Clearance"),
+        ("salary_certificate", "Salary Certificate"),
+        ("land_lease_agreement", "Land Lease Agreement"),
+        ("property_valuation", "Property Valuation"),
+        ("lalpurja", "Lalpurja"),
+        ("bank_statement", "Bank Statement"),
+        ("academic_documents", "Academic Documents"),
+        ("others", "Others"),
+    )
+    STATUS_CHOICES = (
+        ("pending", "Pending"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
+    )
+    UPLOADER_CHOICES = (
+        ("self", "Self"),
+        ("consultancy", "Consultancy"),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="documents")
+    document = models.CharField(max_length=50, choices=DOCUMENT_CHOICES)
+    document_file = models.FileField(upload_to="documents/")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="pending")
+    uploader = models.CharField(max_length=20, choices=UPLOADER_CHOICES, default="self")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.full_name} {self.document}"
+
+    class Meta:
+        db_table = "document"
+        verbose_name_plural = "Documents"
+        ordering = ["-created_at"]
+        unique_together = ("user", "document")

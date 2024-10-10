@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-size: 1.13rem;
+body {
+  font-size: 1.13rem;
 }
 
 .input__text {
@@ -19,7 +19,7 @@ body{
 }
 
 .input__file {
-  @apply w-full p-3 border border-gray-300;
+  @apply w-full px-3 py-2 border border-gray-300;
 }
 
 .input__number::-webkit-outer-spin-button,

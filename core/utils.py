@@ -17,8 +17,11 @@ def random_string(length=8):
 
 
 def upload_to_bunnycdn(file):
+    if not file:
+        print("No file found")
+        return None
     try:
-        file_name = random_string() + file.name
+        file_name = random_string()
         base_url = "storage.bunnycdn.com"
         if STORAGE_ZONE_REGION:
             base_url = f"{STORAGE_ZONE_REGION}.{base_url}"

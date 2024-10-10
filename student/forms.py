@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
-from .models import Profile, Education, LanguageTest
+from .models import Profile, Education, LanguageTest, Document
 
 
 class ProfileForm(forms.ModelForm):
@@ -174,4 +174,21 @@ class LanguageTestForm(forms.ModelForm):
             "test": forms.Select(attrs={"class": "input__text"}),
             "score": forms.NumberInput(attrs={"class": "input__text"}),
             "test_document": forms.FileInput(attrs={"class": "input__text"}),
+        }
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = [
+            "document",
+            "document_file",
+        ]
+        labels = {
+            "document": _("Document"),
+            "document_file": _("Document File"),
+        }
+        widgets = {
+            "document": forms.Select(attrs={"class": "input__text"}),
+            "document_file": forms.FileInput(attrs={"class": "input__file"}),
         }
