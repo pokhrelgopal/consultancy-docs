@@ -6,7 +6,7 @@
                 class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_home' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
                 Home</a>
             <a href="{% url 'student_profile' %}"
-                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_profile' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
+                class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_profile' or request.resolver_match.url_name == 'student_profile_educational' or request.resolver_match.url_name == 'student_profile_test_scores' %} border-b-blue-700  {% else %} border-b-white {% endif %}">
                 Student Profile</a>
             <a href="{% url 'student_documents' %}"
                 class="cursor-pointer py-3 border-b-4 {% if request.resolver_match.url_name == 'student_documents' %} border-b-blue-700  {% else %} border-b-white {% endif %}">

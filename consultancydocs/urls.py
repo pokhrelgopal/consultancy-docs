@@ -11,6 +11,21 @@ urlpatterns = [
         name="manage_students",
     ),
     path(
+        "consultancy/dashboard/student/<int:pk>/",
+        views.student_detail,
+        name="student_detail",
+    ),
+    path(
+        "consultancy/dashboard/student/<int:pk>/application/",
+        views.student_application,
+        name="admin_student_application",
+    ),
+    path(
+        "consultancy/dashboard/student/<int:pk>/documents/",
+        views.student_documents,
+        name="admin_student_documents",
+    ),
+    path(
         "dashboard/manage/applications/",
         views.manage_applications,
         name="manage_applications",

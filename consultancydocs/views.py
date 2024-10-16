@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from users.forms import ConsultancyForm
 from django.db.models import Q
+from student.forms import ProfileForm
+from student.models import Profile
 
 
 def index(request):
@@ -35,7 +37,7 @@ def manage_students(request):
     students = (
         User.objects.select_related("associated_with")
         .filter(associated_with=request.user.consultancy, role="student")
-        .values("full_name", "email", "date_joined")
+        .values("id", "full_name", "email", "date_joined")
     )
     q = request.GET.get("q")
     if q:
@@ -44,6 +46,48 @@ def manage_students(request):
         ).values("full_name", "email", "date_joined")
     context = {"students": students}
     return render(request, "dashboard/manage_students.html", context)
+
+
+@login_required(login_url="login")
+def student_detail(request, pk):
+    if request.user.role != "consultancy":
+        messages.error(request, "You are not authorized to view this page.")
+        return redirect("error")
+    try:
+        student = User.objects.get(pk=pk)
+        form = ProfileForm(request.POST or None)
+        user = student
+        profile = Profile.objects.filter(user=user).first()
+        if profile:
+            form = ProfileForm(request.POST or None, instance=profile)
+        if request.method == "POST" and form.is_valid():
+            Profile.objects.update_or_create(user=user, defaults=form.cleaned_data)
+            messages.success(request, "Profile updated successfully.")
+
+        return render(
+            request, "dashboard/student_detail.html", {"student": student, "form": form}
+        )
+    except User.DoesNotExist:
+        messages.error(request, "Student not found.")
+        return redirect("manage_students")
+
+
+@login_required(login_url="login")
+def student_application(request, pk):
+    if request.user.role != "consultancy":
+        messages.error(request, "You are not authorized to view this page.")
+        return redirect("error")
+    student = User.objects.get(pk=pk)
+    return render(request, "dashboard/student_application.html", {"student": student})
+
+
+@login_required(login_url="login")
+def student_documents(request, pk):
+    if request.user.role != "consultancy":
+        messages.error(request, "You are not authorized to view this page.")
+        return redirect("error")
+    student = User.objects.get(pk=pk)
+    return render(request, "dashboard/student_documents.html", {"student": student})
 
 
 @login_required(login_url="login")

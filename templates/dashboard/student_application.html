@@ -1,0 +1,34 @@
+{%extends 'base/dashboard_base.html'%}
+{%block content%}
+<div class="mb-3">
+    <h4 class="text-3xl font-bold">Student Application</h4>
+    <p class="max-w-3xl">
+        Here you can view the details of the student.
+    </p>
+</div>
+<div class="my-5">
+    <div class="my-5">
+        <div class="border-b border-gray-200 w-fit">
+            <nav class="flex gap-6 text-lg" aria-label="Tabs">
+                <a href="{% url 'student_detail' student.id %}"
+                    class="shrink-0 border-b-2 px-1 pb-4 font-medium hover:border-gray-300 hover:text-gray-700 
+                    {% if request.resolver_match.url_name == 'student_detail' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+                    Personal Details
+                </a>
+
+                <a href="{% url 'admin_student_application' student.id %}"
+                    class="shrink-0 border-b-2 px-1 pb-4 font-medium hover:border-gray-300 hover:text-gray-700 
+                    {% if request.resolver_match.url_name == 'admin_student_application' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+                    Applications
+                </a>
+
+                <a href="{% url 'admin_student_documents' student.id %}"
+                    class="shrink-0 border-b-2 px-1 pb-4 font-medium hover:border-gray-300 hover:text-gray-700 
+                    {% if request.resolver_match.url_name == 'admin_student_documents' %}border-sky-500 text-sky-700{% else %}border-transparent text-gray-500{% endif %}">
+                    Documents
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+{%endblock%}

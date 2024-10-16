@@ -206,4 +206,6 @@ def counsellor_documents(request):
     if request.user.role != "student":
         messages.error(request, "You are not authorized to view this page.")
         return redirect("error")
-    return render(request, "student/counsellor_documents.html")
+    documents = Document.objects.filter(uploader="consultancy")
+    context = {"documents": documents}
+    return render(request, "student/counsellor_documents.html",context)

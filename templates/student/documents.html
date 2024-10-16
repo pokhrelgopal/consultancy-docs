@@ -15,7 +15,7 @@
                 Upload your documents here.
             </p>
         </div>
-        <form id="test__form" method="POST" enctype="multipart/form-data" novalidate>
+        <form id="contact__form" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             {% if form.non_field_errors %}
             <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-400 rounded">

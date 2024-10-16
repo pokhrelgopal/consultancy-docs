@@ -15,6 +15,9 @@
                 Here are the documents shared to you by your consultancy.
             </p>
         </div>
+        {% if documents %}
+        Download the documents shared by your consultancy.
+        {%else%}
         <div class="my-5">
             <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
                 <strong class="block text-lg text-red-800"> No documents.</strong>
@@ -23,6 +26,7 @@
                 </p>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 
