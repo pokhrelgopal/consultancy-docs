@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from users.forms import ConsultancyForm
 from django.db.models import Q
-from student.forms import ProfileForm
-from student.models import Profile
+from student.forms import ProfileForm, DocumentForm
+from student.models import Profile, Document
+from django.db import IntegrityError
 
 
 def index(request):
@@ -34,16 +35,12 @@ def manage_students(request):
     if request.user.role != "consultancy":
         messages.error(request, "You are not authorized to view this page.")
         return redirect("error")
-    students = (
-        User.objects.select_related("associated_with")
-        .filter(associated_with=request.user.consultancy, role="student")
-        .values("id", "full_name", "email", "date_joined")
+    students = User.objects.select_related("associated_with").filter(
+        associated_with=request.user.consultancy, role="student"
     )
     q = request.GET.get("q")
     if q:
-        students = students.filter(
-            Q(full_name__icontains=q) | Q(email__icontains=q)
-        ).values("full_name", "email", "date_joined")
+        students = students.filter(Q(full_name__icontains=q) | Q(email__icontains=q))
     context = {"students": students}
     return render(request, "dashboard/manage_students.html", context)
 
@@ -86,8 +83,17 @@ def student_documents(request, pk):
     if request.user.role != "consultancy":
         messages.error(request, "You are not authorized to view this page.")
         return redirect("error")
+    form = DocumentForm(request.POST or None, request.FILES or None)
     student = User.objects.get(pk=pk)
-    return render(request, "dashboard/student_documents.html", {"student": student})
+    documents = Document.objects.filter(user=student)
+    try:
+        if request.method == "POST" and form.is_valid():
+            Document.objects.create(user=student, **form.cleaned_data)
+            messages.success(request, "Document uploaded successfully.")
+    except IntegrityError:
+        messages.error(request, "This document already exists.")
+    context = {"student": student, "form": form, "documents": documents}
+    return render(request, "dashboard/student_documents.html", context)
 
 
 @login_required(login_url="login")
