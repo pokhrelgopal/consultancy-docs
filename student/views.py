@@ -186,19 +186,22 @@ def documents(request):
     context = {"form": form, "documents": documents}
     return render(request, "student/documents.html", context)
 
-
+# student_documents
 @login_required(login_url="login")
 def delete_document(request, pk):
-    if request.user.role != "student":
-        messages.error(request, "You are not authorized to view this page.")
-        return redirect("error")
     doc = Document.objects.get(id=pk)
-    if doc.user != request.user:
+    student = doc.user
+    consultancy = request.user.consultancy if request.user.role == "consultancy" else None
+    if doc.user == request.user or student.associated_with == consultancy:
+        doc.delete()
+        messages.success(request, "Document deleted successfully.")
+        if request.user.role == "student":
+            return redirect("student_documents")
+        else:
+            return redirect("admin_student_documents", pk=student.id)
+    else:
         messages.error(request, "You are not authorized to delete this document.")
-        return redirect("student_documents")
-    doc.delete()
-    messages.success(request, "Document deleted successfully.")
-    return redirect("student_documents")
+    return redirect("student_documents", pk=student.id)
 
 
 @login_required(login_url="login")
@@ -208,4 +211,4 @@ def counsellor_documents(request):
         return redirect("error")
     documents = Document.objects.filter(uploader="consultancy")
     context = {"documents": documents}
-    return render(request, "student/counsellor_documents.html",context)
+    return render(request, "student/counsellor_documents.html", context)

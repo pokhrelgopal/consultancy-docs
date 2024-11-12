@@ -82,6 +82,7 @@ class Consultancy(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
+        related_name="consultancy",
     )
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     logo = models.ImageField(upload_to="consultancy", null=True, blank=True)
